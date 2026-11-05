@@ -7,6 +7,10 @@
         path = ./cpp;
         description = "C++ development environment";
       };
+      java = {
+        path = ./java;
+        description = "Java development environment";
+      };
       default = self.templates.cpp;
     };
   };
