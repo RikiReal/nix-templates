@@ -9,17 +9,17 @@
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
+    jdk = pkgs.jdk21;
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [
-        pkgs.jdk21
+        jdk
         pkgs.maven
         pkgs.gradle
-        pkgs.jetbrains.idea-community
+        pkgs.jetbrains.idea
       ];
 
       shellHook = ''
-        alias idea='idea-community'
         echo "##########################"
         echo "Java dev environment active"
         echo "##########################"
