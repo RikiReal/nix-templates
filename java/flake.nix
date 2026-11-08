@@ -8,7 +8,10 @@
   outputs = { self, nixpkgs }:
   let
     system = "x86_64-linux";
-    pkgs = import nixpkgs { inherit system; };
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
     jdk = pkgs.jdk21;
   in {
     devShells.${system}.default = pkgs.mkShell {
@@ -20,10 +23,11 @@
       ];
 
       shellHook = ''
+        alias idea="intellij-idea &"
         echo "##########################"
         echo "Java dev environment active"
         echo "##########################"
-        export JAVA_HOME="${jdk}"
+        export JAVA_HOME=${jdk}/lib/openjdk/
         export PATH="$JAVA_HOME/bin:$PATH"
 
         java -version
